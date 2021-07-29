@@ -5,6 +5,8 @@ clear all
 % Load the position of the MikroTik antennas
 load('antennas_mikrotik.mat')
 
+addpath("mD-Track/")
+
 % Calibration
 att = 1e-1;
 
@@ -100,6 +102,17 @@ csi_data = sum(csi_data,3)/num_samples;
 % Apply mD-Track
 [Az_estimated, El_estimated, att] = mD_track_2D(csi_data.', cb_az, cb_el);
 
+% move argument to angles
+Az_estimated = rad2deg(theta_az(Az_estimated));
+El_estimated = rad2deg(theta_el(El_estimated));
+
+
+% re-estimate azimuth. More info at this paper: Uniform Rectangular Antenna Array Design and Calibration Issues for 2-D ESPRIT Application
+Az_estimated_2 = asind(sind(Az_estimated) .* cosd(El_estimated));
+
+% Power
+power = abs(att).^2;
+
 %% FTM
 ftm_times = Parse_ftm(ftm_filename);
 
@@ -123,11 +136,6 @@ distance = median(distances) - antenna_ftm_offset;
 
 
 %% Nice display
-Az_estimated = rad2deg(theta_az(Az_estimated));
-El_estimated = rad2deg(theta_el(El_estimated));
-
-% Power
-power = abs(att).^2;
 
 clc
 disp(['Main path has an azimut of ' num2str(Az_estimated(1)) ' degrees, an elevation of ' num2str(El_estimated(1)) ' degrees and a power of ' num2str(power(1))])

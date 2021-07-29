@@ -30,7 +30,7 @@ function [Az_estimated, El_estimated, att] = mD_track_2D(channel, S_az, S_el)
     while (out == 0)
         % iterate over the number of paths
         l = l + 1;
-%         z functions
+        % z functions
 %         [matrix_az_el] = Jointly_Azimuth_Elevation_Estimator(S_az, S_el, channel_aux);
         [matrix_az_el] = Jointly_Azimuth_Elevation_Estimator_Faster(S_az, S_el, channel_aux);
         % take the power
