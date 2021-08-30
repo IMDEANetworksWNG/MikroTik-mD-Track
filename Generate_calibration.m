@@ -69,10 +69,10 @@ for jj=1:30
     pre_channel(row, col, :) = a(1:num_samples, :);
 end
 
-antenna_oscillator_phases = pre_channel;
+antenna_oscilator_phases = pre_channel;
 
 % Average over the number of samples
-antenna_oscillator_phases = sum(antenna_oscillator_phases,3)/num_samples;
+antenna_oscilator_phases = sum(antenna_oscilator_phases,3)/num_samples;
 
 %% FTM
 ftm_times = Parse_ftm(ftm_filename);
@@ -98,4 +98,4 @@ distance = median(distances);
 antenna_ftm_offset = abs(distance - routers_true_distance);
 
 %% Save the calibration
-save(out_filename, 'antenna_ftm_offset', 'antenna_oscillator_phases');
+save(out_filename, 'antenna_ftm_offset', 'antenna_oscilator_phases');
