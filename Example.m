@@ -108,7 +108,7 @@ El_estimated = rad2deg(theta_el(El_estimated));
 
 
 % re-estimate azimuth. More info at this paper: Uniform Rectangular Antenna Array Design and Calibration Issues for 2-D ESPRIT Application
-Az_estimated_2 = asind(sind(Az_estimated) .* cosd(El_estimated));
+Az_estimated_2 = asind(sind(Az_estimated) ./ cosd(El_estimated));
 
 % Power
 power = abs(att).^2;
