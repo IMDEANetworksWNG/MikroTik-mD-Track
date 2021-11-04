@@ -71,7 +71,7 @@ for jj=1:30
         try
             [a, phase_offset_0, converged] = Sanitize(a);
         catch
-            disp(['Converging error on file ' filename])
+            disp(['Converging error on file ' csi_filename])
         end
 
         if converging_retries == converging_limit
@@ -83,7 +83,7 @@ for jj=1:30
     end
 
     if converging_retries == converging_limit
-        disp(['Converging threshold reached, ignoring ' filename])
+        disp(['Converging threshold reached, ignoring ' csi_filename])
         continue
     end
 
